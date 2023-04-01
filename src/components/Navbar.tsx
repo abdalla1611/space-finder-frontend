@@ -6,9 +6,17 @@ export class Navbar extends React.Component<{ user: User | undefined }> {
   render(): React.ReactNode {
     let loginOut: any;
     if (this.props.user) {
-      loginOut = <Link to="/logout">{this.props.user.userName}</Link>;
+      loginOut = (
+        <Link to="/logout" style={{ float: "right" }}>
+          {this.props.user.userName}
+        </Link>
+      );
     } else {
-      loginOut = <Link to="/login">Login</Link>;
+      loginOut = (
+        <Link to="/login" style={{ float: "right" }}>
+          Login
+        </Link>
+      );
     }
 
     return (

@@ -1,4 +1,4 @@
-import React from "react";
+import React from "react"; // for some reason if I delete this line the application will not work
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import { App } from "./components/App";
