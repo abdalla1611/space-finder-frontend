@@ -5,7 +5,8 @@ import { Login } from "./Login";
 import {
   BrowserRouter as Router,
   Route,
-  Routes /*instead of Switch */,
+  Routes,
+  useNavigate /*instead of Switch */,
 } from "react-router-dom";
 import createBrowserHistory from "../utils/history";
 import { Navbar } from "./Navbar";
@@ -29,7 +30,6 @@ export class App extends React.Component<{}, AppState> {
 
   private setUser(user: User) {
     this.setState({ user: user });
-    console.log("setting the User :" + JSON.stringify(user));
   }
 
   render(): React.ReactNode {

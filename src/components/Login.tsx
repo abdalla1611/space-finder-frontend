@@ -1,6 +1,7 @@
 import React, { SyntheticEvent } from "react";
 import { User } from "../model/Model";
 import { AuthService } from "../services/AuthService";
+import { Navigate } from "react-router-dom";
 
 interface LoginProps {
   authService: AuthService;
@@ -36,7 +37,6 @@ export class Login extends React.Component<LoginProps, LoginState> {
   private async handleSubmit(event: SyntheticEvent) {
     event.preventDefault();
     this.setState({ loginAttenpted: true });
-
     const result = await this.props.authService.login(
       this.state.userName,
       this.state.password
@@ -58,21 +58,27 @@ export class Login extends React.Component<LoginProps, LoginState> {
       }
     }
     return (
-      <div>
-        <h2>Please Login</h2>
+      <div className="login-box">
+        {this.state.loginSuccesfull && <Navigate to={"/profile"} />}
         <form onSubmit={(event) => this.handleSubmit(event)}>
-          <input
-            value={this.state.userName}
-            onChange={(event) => this.setUserName(event)}
-          />
+          <div className="user-box">
+            <input
+              value={this.state.userName}
+              onChange={(event) => this.setUserName(event)}
+            />
+            <label>Username</label>
+          </div>
           <br />
-          <input
-            value={this.state.password}
-            type="password"
-            onChange={(event) => this.setPassword(event)}
-          />
+          <div className="user-box">
+            <input
+              value={this.state.password}
+              type="password"
+              onChange={(event) => this.setPassword(event)}
+            />
+            <label>Password</label>
+          </div>
           <br />
-          <input type="submit" value="login" />
+          <input type="submit" value={"login"} className="login"></input>
         </form>
         {loginMessage}
       </div>
