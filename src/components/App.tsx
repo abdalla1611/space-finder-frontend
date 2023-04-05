@@ -1,35 +1,31 @@
-import React from "react";
-import { User } from "../model/Model";
-import { AuthService } from "../services/AuthService";
-import { Login } from "./Login";
-import {
-  BrowserRouter as Router,
-  Route,
-  Routes,
-  useNavigate /*instead of Switch */,
-} from "react-router-dom";
-import createBrowserHistory from "../utils/history";
-import { Navbar } from "./Navbar";
-import { Home } from "./Home";
-import { Profile } from "./Profile";
-
+import React from "react"
+import { User } from "../model/Model"
+import { AuthService } from "../services/AuthService"
+import { Login } from "./Login"
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom"
+// import createBrowserHistory from "../utils/history"
+import { Navbar } from "./Navbar"
+import { Home } from "./Home"
+import { Profile } from "./Profile"
+import { Spaces } from "./spaces/Spaces"
+import { DataService } from "../services/DataService"
 interface AppState {
-  user: User | undefined;
+  user: User | undefined
 }
 
 export class App extends React.Component<{}, AppState> {
-  private auth: AuthService = new AuthService();
-
+  private auth: AuthService = new AuthService()
+  private dataService: DataService = new DataService()
   constructor(props: any) {
-    super(props);
+    super(props)
     this.state = {
       user: undefined,
-    };
-    this.setUser = this.setUser.bind(this);
+    }
+    this.setUser = this.setUser.bind(this)
   }
 
   private setUser(user: User) {
-    this.setState({ user: user });
+    this.setState({ user: user })
   }
 
   render(): React.ReactNode {
@@ -42,15 +38,20 @@ export class App extends React.Component<{}, AppState> {
               <Route path="/" element={<Home />} />
               <Route
                 path={"/login"}
-                element={
-                  <Login authService={this.auth} setUser={this.setUser} />
-                }
+                element={<Login authService={this.auth} setUser={this.setUser} />}
               />
-              <Route path={"/profile"} element={<Profile />} />
+              <Route
+                path={"/profile"}
+                element={<Profile authService={this.auth} user={this.state.user} />}
+              />
+              <Route
+                path={"/spaces"}
+                element={<Spaces dataService={this.dataService} />}
+              />
             </Routes>
           </div>
         </Router>
       </div>
-    );
+    )
   }
 }

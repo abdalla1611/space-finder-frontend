@@ -1,4 +1,5 @@
 {
   "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "javascript.format.semicolons": "insert"
+  "javascript.format.semicolons": "insert",
+  "prettier.trailingComma": "es5"
 }
