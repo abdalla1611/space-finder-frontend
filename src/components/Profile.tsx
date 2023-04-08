@@ -1,7 +1,7 @@
-import React from "react"
-import { Link } from "react-router-dom"
-import { User, UserAttribute } from "../model/Model"
-import { AuthService } from "../services/AuthService"
+import React from 'react'
+import { Link } from 'react-router-dom'
+import { User, UserAttribute } from '../model/Model'
+import { AuthService } from '../services/AuthService'
 
 interface ProfileState {
   userAttributes: UserAttribute[]
@@ -13,7 +13,7 @@ interface ProfileProps {
 }
 export class Profile extends React.Component<ProfileProps, ProfileState> {
   state: ProfileState = {
-    userAttributes: []
+    userAttributes: [],
   }
 
   /*Called immediately after a component is mounted. Setting state here will trigger re-rendering. */
@@ -21,7 +21,7 @@ export class Profile extends React.Component<ProfileProps, ProfileState> {
     if (this.props.user) {
       const useratts = await this.props.authService.getUserAttributes(this.props.user)
       this.setState({
-        userAttributes: useratts
+        userAttributes: useratts,
       })
     }
   }
@@ -29,9 +29,9 @@ export class Profile extends React.Component<ProfileProps, ProfileState> {
     const rows = []
     for (const UserAttribute of this.state.userAttributes) {
       rows.push(
-        <tr key={UserAttribute.name}>
-          <td>{UserAttribute.name}</td>
-          <td>{UserAttribute.value}</td>
+        <tr key={UserAttribute.Name}>
+          <td>{UserAttribute.Name}</td>
+          <td>{UserAttribute.Value}</td>
         </tr>
       )
     }
@@ -54,7 +54,7 @@ export class Profile extends React.Component<ProfileProps, ProfileState> {
     } else {
       profileSpace = (
         <div>
-          please <Link to={"/login"}> Login</Link>
+          please <Link to={'/login'}> Login</Link>
         </div>
       )
     }

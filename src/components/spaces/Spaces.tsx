@@ -1,8 +1,9 @@
-import React from "react"
-import { Space } from "../../model/Model"
-import { DataService } from "../../services/DataService"
-import { SpaceComponent } from "./SpaceComponents"
-import { ConfirmModalComp } from "./ConfirmModalComp"
+import React from 'react'
+import { Space } from '../../model/Model'
+import { DataService } from '../../services/DataService'
+import { SpaceComponent } from './SpaceComponents'
+import { ConfirmModalComp } from './ConfirmModalComp'
+import { Link } from 'react-router-dom'
 
 interface SpacesState {
   spaces: Space[]
@@ -20,7 +21,7 @@ export class Spaces extends React.Component<SpacesProps, SpacesState> {
     this.state = {
       spaces: [],
       showModal: false,
-      modalContent: "",
+      modalContent: '',
     }
     this.reserveSpace = this.reserveSpace.bind(this)
     this.closeModal = this.closeModal.bind(this)
@@ -65,13 +66,15 @@ export class Spaces extends React.Component<SpacesProps, SpacesState> {
   private closeModal() {
     this.setState({
       showModal: false,
-      modalContent: "",
+      modalContent: '',
     })
   }
   render(): React.ReactNode {
     return (
       <div>
         <h2>Wellcome to the Spaces page</h2>
+        <Link to={'/createSpace'}>Create Space</Link>
+        <br />
         {this.renderSpaces()}
         <ConfirmModalComp
           close={this.closeModal}
