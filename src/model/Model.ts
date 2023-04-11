@@ -1,4 +1,4 @@
-import { CognitoUser } from "@aws-amplify/auth"
+import { CognitoUser } from '@aws-amplify/auth'
 
 export interface User {
   userName: string
@@ -14,5 +14,5 @@ export interface Space {
   spaceId: string
   name: string
   location: string
-  photoUrl?: string
+  photoURL?: string
 }

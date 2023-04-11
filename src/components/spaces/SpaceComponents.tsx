@@ -1,19 +1,19 @@
-import React from "react"
-import { User } from "../../model/Model"
-import genImg from "../../assets/bgu.jpg"
-import "./SpaceComponent.css"
+import React from 'react'
+import { User } from '../../model/Model'
+import genImg from '../../assets/bgu.jpg'
+import './SpaceComponent.css'
 
 interface SpaceComponentProps {
   spaceId: string
   name: string
   location: string
-  photoUrl?: string
+  photoURL?: string
   reserveSpace: (spaceId: string) => void
 }
 export class SpaceComponent extends React.Component<SpaceComponentProps> {
   private renderImage() {
-    if (this.props.photoUrl) {
-      return <img src={this.props.photoUrl} alt="" />
+    if (this.props.photoURL) {
+      return <img src={this.props.photoURL} alt="" />
     } else {
       return <img src={genImg} alt="" />
     }
