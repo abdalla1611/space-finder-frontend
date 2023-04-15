@@ -1,5 +1,5 @@
 import { ICreateSpaceState } from '../components/spaces/CreateSpace'
-import { Space } from '../model/Model'
+import { Space,User } from '../model/Model'
 import { S3, config } from 'aws-sdk'
 import { config as appConfig } from './config'
 import { GenerateRandomId } from '../utils/Utils'
@@ -8,6 +8,11 @@ config.update({
 })
 
 export class DataService {
+  private user: User | undefined
+
+  public setUser(user: User){
+    this.user = user
+  }
   public async createSpace(icreateSpace: ICreateSpaceState) {
     if (icreateSpace.photo) {
       const photoURL = await this.uploadPublicFile(
@@ -42,11 +47,21 @@ export class DataService {
       .promise()
     return uploadResult.Location
   }
-
+  private getUserIdToken(){
+    if(this.user){
+      return this.user.cognitoUser.getSignInUserSession()!.getIdToken().getJwtToken()
+    }
+    else{
+      return ''
+    }
+  }
   public async getSpaces(): Promise<Space[]> {
     const requestUrl = appConfig.api.spacesUrl
     const requestResult = await fetch(requestUrl, {
       method: 'GET',
+      headers:{
+        'Authorization': this.getUserIdToken()
+      }
     })
     const responseJSON = await requestResult.json()
     return responseJSON
